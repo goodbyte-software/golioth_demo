@@ -1,0 +1,7 @@
+west-commands:
+  - file: utility/west-commands/west_download.py
+    commands:
+      - name: download
+        class: Download
+        help: helper command when using Codespaces
+
