@@ -1,0 +1,35 @@
+services:
+  dev_container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+  
+    environment:
+      HOME: ${HOME_DEV}
+      DISPLAY: ${DISPLAY:-:0}
+      TZ: Europe/Warsaw
+      QT_X11_NO_MITSHM: 1
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+    privileged: true # to have access to /dev
+    init: true
+    stdin_open: true
+    tty: true
+    entrypoint: [ "/bin/bash" ]
+    working_dir: ${WORKSPACE}
+    user: ${USER_NAME}
+    network_mode: host
+    volumes:
+      # volumes in /
+      - /dev/bus/usb/:/dev/bus/usb
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /etc/timezone:/etc/timezone:ro
+      - ../:${WORKSPACE}
+      # volumes in HOME
+      - history:${HOME_DEV}/.history
+      - ~/.ssh:${HOME_DEV}/.ssh
+
+volumes:
+  history:
+    name: history_volume

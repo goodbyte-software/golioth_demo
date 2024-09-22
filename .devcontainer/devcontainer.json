@@ -1,0 +1,23 @@
+{
+    "name": "dev_container",
+    "dockerComposeFile": [
+        "./docker-compose.yml"
+    ],
+    "service": "dev_container",
+    "runServices": [
+        "dev_container"
+    ],
+    "workspaceFolder": "/repo",
+    // Try to exec docker container as a root to chown .vscode-server to user
+    // or use rootless mode
+    "shutdownAction": "stopCompose",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "llvm-vs-code-extensions.vscode-clangd",
+                "codechecker.vscode-codechecker",
+                "nordic-semiconductor.nrf-connect-extension-pack"
+            ]
+        }
+    }
+}

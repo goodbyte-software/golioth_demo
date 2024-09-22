@@ -1,0 +1,9 @@
+build*/
+.vscode
+.cache
+credentials.conf
+__pycache__/
+
+# west files
+.west
+deps
