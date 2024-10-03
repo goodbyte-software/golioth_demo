@@ -1,0 +1,7 @@
+{
+    "id": "NCLT",
+    "version": "1.0.0",
+    "name": "NRFCommandLineTools",
+    "description": "Installs Nrf Command Line Tools."
+
+}

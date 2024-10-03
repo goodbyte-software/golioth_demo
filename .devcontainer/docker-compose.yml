@@ -2,20 +2,13 @@ services:
   dev_container:
     build:
       context: .
-      dockerfile: Dockerfile
-  
     environment:
-      HOME: ${HOME_DEV}
-      DISPLAY: ${DISPLAY:-:0}
-      TZ: Europe/Warsaw
       QT_X11_NO_MITSHM: 1
     privileged: true # to have access to /dev
     init: true
     stdin_open: true
     tty: true
     entrypoint: [ "/bin/bash" ]
-    working_dir: ${WORKSPACE}
-    user: ${USER_NAME}
     network_mode: host
     volumes:
       # volumes in /

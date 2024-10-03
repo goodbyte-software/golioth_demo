@@ -1,16 +1,21 @@
 {
+    "image": "golioth/golioth-zephyr-base:0.16.3-SDK-v0",
     "name": "dev_container",
-    "dockerComposeFile": [
-        "./docker-compose.yml"
+    "features": {
+        "./features/nclt": {},
+        "./features/nrfutil": {}   
+    },
+    "mounts": [
+        "source=.,target=/repo,type=bind"
     ],
+    "dockerComposeFile": "docker-compose.yml",
     "service": "dev_container",
-    "runServices": [
-        "dev_container"
-    ],
     "workspaceFolder": "/repo",
-    // Try to exec docker container as a root to chown .vscode-server to user
-    // or use rootless mode
+    "remoteEnv": { "LC_ALL": "C" },
     "shutdownAction": "stopCompose",
+    "runArgs": [
+    "--privileged"
+    ]
     "customizations": {
         "vscode": {
             "extensions": [
@@ -21,3 +26,4 @@
         }
     }
 }
+
