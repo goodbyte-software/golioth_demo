@@ -1,7 +1,0 @@
-{
-    "id": "Udev",
-    "version": "1.0.0",
-    "name": "nrf-udev",
-    "description": "so you can see usb devices :)."
-
-}

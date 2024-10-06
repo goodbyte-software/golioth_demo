@@ -2,13 +2,17 @@
     "image": "golioth/golioth-zephyr-base:0.16.3-SDK-v0",
     "name": "dev_container",
     "features": {
+        "./features/gb_commons": {},
         "./features/nclt": {},
-        "./features/nrfutil": {}   
+        "./features/nrfutil": {},
+        "./features/clangd": {}
+
+
     },
     "mounts": [
         "source=.,target=/repo,type=bind"
     ],
-    "dockerComposeFile": "docker-compose.yml",
+    "onCreateCommand": "bash -i /repo/.devcontainer/onCreateCommand.sh",
     "service": "dev_container",
     "workspaceFolder": "/repo",
     "remoteEnv": { "LC_ALL": "C" },
@@ -19,9 +23,8 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "llvm-vs-code-extensions.vscode-clangd",
-                "codechecker.vscode-codechecker",
-                "nordic-semiconductor.nrf-connect-extension-pack"
+                "nordic-semiconductor.nrf-connect-extension-pack",
+                "llvm-vs-code-extensions.vscode-clangd"
             ]
         }
     }

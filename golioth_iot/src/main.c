@@ -76,6 +76,8 @@ void update_lightdb_state_work_handler(struct k_work *work) {
 		LOG_WRN("Failed to set selected_led: %d", err);
 		return;
 	}
+
+
 }
 
 K_WORK_DEFINE(update_state_work, update_lightdb_state_work_handler);
