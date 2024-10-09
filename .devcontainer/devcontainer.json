@@ -19,12 +19,11 @@
     "shutdownAction": "stopCompose",
     "runArgs": [
     "--privileged"
-    ]
+    ],
     "customizations": {
         "vscode": {
             "extensions": [
                 "nordic-semiconductor.nrf-connect-extension-pack",
-                "llvm-vs-code-extensions.vscode-clangd"
             ]
         }
     }
