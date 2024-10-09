@@ -1,0 +1,9 @@
+{
+    "id": "ClangD",
+    "version": "1.0.0",
+    "name": "ClangD",
+    "description": "ClangD",
+    "installsAfter": [
+        "./features/gb_commons"
+    ]
+}

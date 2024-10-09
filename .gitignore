@@ -7,3 +7,7 @@ __pycache__/
 # west files
 .west
 deps
+<<<<<<< HEAD
+=======
+log.log
+>>>>>>> 912fc0f (Added LEDs)

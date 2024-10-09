@@ -1,23 +1,30 @@
 {
+
+    "image": "golioth/golioth-zephyr-base:0.16.3-SDK-v0",
     "name": "dev_container",
-    "dockerComposeFile": [
-        "./docker-compose.yml"
+    "features": {
+        "./features/gb_commons": {},
+        "./features/nclt": {},
+        "./features/nrfutil": {},
+        "./features/clangd": {}
+    },
+    "mounts": [
+        "source=.,target=/repo,type=bind"
     ],
-    "service": "dev_container",
-    "runServices": [
-        "dev_container"
-    ],
+    "onCreateCommand": "bash -i /repo/.devcontainer/onCreateCommand.sh",
     "workspaceFolder": "/repo",
-    // Try to exec docker container as a root to chown .vscode-server to user
-    // or use rootless mode
-    "shutdownAction": "stopCompose",
+    "remoteEnv": { "LC_ALL": "C" },
+    "shutdownAction": "stopContainer",
+    "runArgs": [
+    "--privileged"
+    ],
     "customizations": {
         "vscode": {
             "extensions": [
-                "llvm-vs-code-extensions.vscode-clangd",
-                "codechecker.vscode-codechecker",
-                "nordic-semiconductor.nrf-connect-extension-pack"
+                "nordic-semiconductor.nrf-connect-extension-pack",
+                "llvm-vs-code-extensions.vscode-clangd"
             ]
         }
     }
 }
+
