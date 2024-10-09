@@ -1,0 +1,38 @@
+manifest:
+  version: 0.8
+
+  projects:
+    - name: golioth
+      path: modules/lib/golioth-firmware-sdk
+      revision: v0.14.0
+      url: https://github.com/golioth/golioth-firmware-sdk
+      submodules: true
+      import:
+        file: west-ncs.yml
+        path-prefix: deps
+        name-allowlist:
+          - nrf
+          - zephyr
+          - cmsis
+          - hal_nordic
+          - hostap
+          - mbedtls
+          - mbedtls-nrf
+          - mcuboot
+          - net-tools
+          - nrfxlib
+          - qcbor
+          - segger
+          - tfm-mcuboot
+          - tinycrypt
+          - trusted-firmware-m
+          - zcbor
+
+    - name: zephyr-network-info
+      path: deps/modules/lib/network-info
+      revision: v1.1.1
+      url: https://github.com/golioth/zephyr-network-info
+
+  self:
+    path: golioth-iot
+

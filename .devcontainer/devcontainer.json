@@ -1,0 +1,29 @@
+{
+    "image": "golioth/golioth-zephyr-base:0.16.3-SDK-v0",
+    "name": "dev_container",
+    "features": {
+        "./features/gb_commons": {},
+        "./features/nclt": {},
+        "./features/nrfutil": {},
+        "./features/clangd": {}
+    },
+    "mounts": [
+        "source=.,target=/repo,type=bind"
+    ],
+    "onCreateCommand": "bash -i /repo/.devcontainer/onCreateCommand.sh",
+    "workspaceFolder": "/repo",
+    "remoteEnv": { "LC_ALL": "C" },
+    "shutdownAction": "stopContainer",
+    "runArgs": [
+    "--privileged"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "nordic-semiconductor.nrf-connect-extension-pack",
+                "llvm-vs-code-extensions.vscode-clangd"
+            ]
+        }
+    }
+}
+
