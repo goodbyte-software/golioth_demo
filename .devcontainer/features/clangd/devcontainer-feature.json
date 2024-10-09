@@ -10,24 +10,26 @@
         "vscode": {
             "extensions": [
                 "llvm-vs-code-extensions.vscode-clangd"
-            ]
+            ],
+            "settings": {
+                /// CLANGD settings:
+                "C_Cpp.intelliSenseEngine": "disabled",
+                // "clangd.path": "/usr/bin/clangd", //if clangd is not in PATH
+                "clangd.arguments": [
+                    "--pretty",
+                    "--enable-config",
+                    "--background-index",
+                    "--compile-commands-dir=${workspaceFolder}/build",
+                    "--header-insertion=never",
+                    // example: ZEPHYR_SDK_INSTALL_DIR=/root/ncs/toolchains/2be090971e/opt/zephyr-sdk
+                    "--query-driver=${env:ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/bin/arm-zephyr-eabi-*",
+                    // Use verbose mode in case of clang problems: check in window OUTPUT with clangd in dropdown menu !open some c/cpp file first!
+                    "--log=verbose"
+                    // "--log=error"
+                ],
+                "clangd.checkUpdates": false
+                /// CLANGD settings^
+            }
         }
-    },
-    	/// CLANGD settings:
-        "C_Cpp.intelliSenseEngine": "disabled",
-        "clangd.path": "/usr/bin/clangd", //if clangd is not in PATH
-        "clangd.arguments": [
-                "--pretty",
-                "--enable-config",
-                "--background-index",
-                "--compile-commands-dir=${workspaceFolder}/build",
-                "--header-insertion=never",
-                // example: ZEPHYR_SDK_INSTALL_DIR=/root/ncs/toolchains/2be090971e/opt/zephyr-sdk
-                "--query-driver=${env:ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/bin/arm-zephyr-eabi-*",
-                // Use verbose mode in case of clang problems: check in window OUTPUT with clangd in dropdown menu !open some c/cpp file first!
-                "--log=verbose"
-                // "--log=error"
-        ],
-        "clangd.checkUpdates": false
-        /// CLANGD settings^
+    }
 }
