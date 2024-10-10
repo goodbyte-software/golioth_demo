@@ -3,11 +3,8 @@ build*/
 .cache
 credentials.conf
 __pycache__/
-
+log.log
 # west files
 .west
 deps
-<<<<<<< HEAD
-=======
-log.log
->>>>>>> 912fc0f (Added LEDs)
+
