@@ -6,14 +6,12 @@
         "./features/nclt": {},
         "./features/nrfutil": {},
         "./features/clangd": {}
-
-
     },
     "mounts": [
         "source=.,target=/repo,type=bind"
     ],
     "onCreateCommand": "bash -i /repo/.devcontainer/onCreateCommand.sh",
-    // "service": "dev_container",
+
     "workspaceFolder": "/repo",
     "remoteEnv": { "LC_ALL": "C" },
     "shutdownAction": "stopContainer",
