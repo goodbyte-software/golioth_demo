@@ -18,3 +18,5 @@ echo 'export PS1="\u@\h \[\033[36m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m
 
 echo 'export ZEPHYR_SDK_INSTALL_DIR=/opt/toolchains/zephyr-sdk-0.16.3' >> $HOME/.bashrc
 echo 'source /repo/deps/zephyr/zephyr-env.sh' >> $HOME/.bashrc
+
+cp /repo/.clangd /opt/
