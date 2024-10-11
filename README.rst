@@ -7,7 +7,9 @@ Golioth demo repository - Goodbyte Software
 
 This is an adapted version of this `Golioth Zephyr training example <https://github.com/golioth/zephyr-training/tree/1d8840429516d862fb71c21c833e6e283d705927/01_IOT>`_
 
-It has been modified by Goodbyte Software for educational purposes. The original project is licensed under the Apache License 2.0, and any changes have been made in accordance with this license.
+`<Changes> <https://github.com/goodbyte-software/golioth_demo/compare/init...master?expand=1>`_
+
+It has been modified by Goodbyte Software for educational purposes `<Changes> <https://github.com/goodbyte-software/golioth_demo/compare/init...master?expand=1>`_. The original project is licensed under the Apache License 2.0, and any changes have been made in accordance with this license.
 
 Our goal was to facilitate a quick start with Golioth, using Visual Studio Code and Dev Containers.
 In fact, after cloning this repository and creating an account on Golioth, you should be able to run this Golioth project in 5 simple steps.
@@ -55,7 +57,6 @@ References
 `<https://github.com/golioth/zephyr-training>`_
 
 `<https://www.nordicsemi.com/Products/Development-hardware/nRF7002-DK>`_
-
 
 
 ## 📜 License
