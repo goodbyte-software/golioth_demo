@@ -1,5 +1,15 @@
 Golioth demo repository - Goodbyte Software
 #######################
+.. image:: .assets/logo.png
+   :alt: Logo GB
+   :width: 300px  # Opcjonalnie dostosuj rozmiar
+
+This is an adapted version of [Golioth Zephyr training](https://github.com/golioth/zephyr-training).
+It has been modified by Goodbyte Software for educational purposes. The original project is licensed under the Apache License 2.0, and any changes have been made in accordance with this license.
+
+Our goal was to facilitate a quick start with Golioth, using Visual Studio Code and Dev Containers.
+In fact, after cloning this repository and creating an account on Golioth, you should be able to run this Golioth project in 5 simple steps.
+
 
 This README helps to install GoliothSDK properly with our demo.
 
@@ -46,5 +56,5 @@ References
 
 
 
-
-
+## 📜 License
+This project is licensed under Apache-2.0 same as the original project.
