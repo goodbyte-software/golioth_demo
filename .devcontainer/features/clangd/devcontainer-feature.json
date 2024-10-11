@@ -19,7 +19,7 @@
                     "--pretty",
                     "--enable-config",
                     "--background-index",
-                    "--compile-commands-dir=${workspaceFolder}/build",
+                    "--compile-commands-dir=${workspaceFolder}/golioth_iot/build",
                     "--header-insertion=never",
                     // example: ZEPHYR_SDK_INSTALL_DIR=/root/ncs/toolchains/2be090971e/opt/zephyr-sdk
                     "--query-driver=${env:ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/bin/arm-zephyr-eabi-*",
@@ -32,4 +32,5 @@
             }
         }
     }
+
 }

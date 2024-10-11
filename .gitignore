@@ -3,7 +3,8 @@ build*/
 .cache
 credentials.conf
 __pycache__/
-
+log.log
 # west files
 .west
 deps
+

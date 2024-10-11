@@ -4,6 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+
+
+#include "zephyr/kernel.h"
+
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(golioth_iot, LOG_LEVEL_DBG);
 
@@ -34,7 +38,8 @@ LOG_MODULE_REGISTER(golioth_iot, LOG_LEVEL_DBG);
 #define BLINK_DELAY_MS_MIN 200
 #define BLINK_DELAY_MS_MAX 2000
 
-struct golioth_client *client;
+
+struct golioth_client* client;
 static int32_t _loop_delay_s = 5;
 static k_tid_t _system_thread = 0;
 
@@ -42,8 +47,9 @@ static K_SEM_DEFINE(golioth_connected, 0, 1);
 
 #define SW0_N DT_ALIAS(sw0)
 #define SW1_N DT_ALIAS(sw1)
-static const struct gpio_dt_spec button0 = GPIO_DT_SPEC_GET_OR(SW0_N, gpios, {0});
-static const struct gpio_dt_spec button1 = GPIO_DT_SPEC_GET_OR(SW1_N, gpios, {0});
+static const struct gpio_dt_spec button0 = GPIO_DT_SPEC_GET_OR(SW0_N, gpios, { 0 });
+static const struct gpio_dt_spec button1 = GPIO_DT_SPEC_GET_OR(SW1_N, gpios, { 0 });
+
 static struct gpio_callback button_cb_data;
 
 uint8_t _led_sel = 0;
@@ -77,116 +83,102 @@ void update_lightdb_state_work_handler(struct k_work *work) {
 		return;
 	}
 
-
+    k_wakeup(_system_thread);
 }
 
 K_WORK_DEFINE(update_state_work, update_lightdb_state_work_handler);
 
-void button_pressed(const struct device *dev, struct gpio_callback *cb,
-		    uint32_t pins)
+
+void button_pressed(const struct device* dev, struct gpio_callback* cb, uint32_t pins)
 {
-	if (pins & BIT(button0.pin)) {
-		_led_sel = 0;
-	} else if (pins & BIT(button1.pin)) {
-		_led_sel = 1;
-	} else {
-		LOG_WRN("Ignoring unknown button press even: %d", pins);
-		return;
-	}
+    if (pins & BIT(button0.pin)) {
+        _led_sel = 0;
+    } else if (pins & BIT(button1.pin)) {
+        _led_sel = 1;
+    } else {
+        LOG_WRN("Ignoring unknown button press even: %d", pins);
+        return;
+    }
 
-	LOG_INF("Pins: %d", pins);
+    LOG_INF("Pins: %d", pins);
 
-	led_set_selected(_led_sel);
-	led_wake_thread();
+    led_set_selected(_led_sel);
+    led_wake_thread();
 
-	/*
-	 * Don't call Golioth APIs from an interrupt;
-	 * This worker will run on the system thread
-	 */
-	k_work_submit(&update_state_work);
+    /*
+     * Don't call Golioth APIs from an interrupt;
+     * This worker will run on the system thread
+     */
+    k_work_submit(&update_state_work);
 }
 
-static enum golioth_settings_status on_loop_delay_setting(int32_t new_value, void *arg)
+static enum golioth_settings_status on_loop_delay_setting(int32_t new_value, void* arg)
 {
-	LOG_INF("Setting loop delay to %d s", new_value);
-	_loop_delay_s = new_value;
-	return GOLIOTH_SETTINGS_SUCCESS;
+    LOG_INF("Setting loop delay to %d s", new_value);
+    _loop_delay_s = new_value;
+    return GOLIOTH_SETTINGS_SUCCESS;
 }
 
-static enum golioth_settings_status on_blink_delay_setting(int32_t new_value, void *arg)
+static enum golioth_settings_status on_blink_delay_setting(int32_t new_value, void* arg)
 {
-	led_set_delay(new_value);
-	LOG_INF("Set blink delay to %d milliseconds", new_value);
-	led_wake_thread();
-	return GOLIOTH_SETTINGS_SUCCESS;
+    led_set_delay(new_value);
+    LOG_INF("Set blink delay to %d milliseconds", new_value);
+    led_wake_thread();
+    return GOLIOTH_SETTINGS_SUCCESS;
 }
 
-static enum golioth_rpc_status on_multiply(zcbor_state_t *request_params_array,
-                                           zcbor_state_t *response_detail_map,
-                                           void *callback_arg)
+static enum golioth_rpc_status on_multiply(zcbor_state_t* request_params_array, zcbor_state_t* response_detail_map, void* callback_arg)
 {
-	double a, b;
-	double value;
-	bool ok;
+    double a, b;
+    double value;
+    bool ok;
 
-	ok = zcbor_float_decode(request_params_array, &a) &&
-	     zcbor_float_decode(request_params_array, &b);
-	if (!ok)
-	{
-		LOG_ERR("Failed to decode array items");
-		return GOLIOTH_RPC_INVALID_ARGUMENT;
-	}
+    ok = zcbor_float_decode(request_params_array, &a) && zcbor_float_decode(request_params_array, &b);
+    if (!ok) {
+        LOG_ERR("Failed to decode array items");
+        return GOLIOTH_RPC_INVALID_ARGUMENT;
+    }
 
-	value = a * b;
+    value = a * b;
 
-	LOG_DBG("%lf * %lf = %lf", a, b, value);
+    LOG_DBG("%lf * %lf = %lf", a, b, value);
 
-	ok = zcbor_tstr_put_lit(response_detail_map, "value") &&
-	     zcbor_float64_put(response_detail_map, value);
-	if (!ok)
-	{
-		LOG_ERR("Failed to encode value");
-		return GOLIOTH_RPC_RESOURCE_EXHAUSTED;
-	}
+    ok = zcbor_tstr_put_lit(response_detail_map, "value") && zcbor_float64_put(response_detail_map, value);
+    if (!ok) {
+        LOG_ERR("Failed to encode value");
+        return GOLIOTH_RPC_RESOURCE_EXHAUSTED;
+    }
 
-	return GOLIOTH_RPC_OK;
+    return GOLIOTH_RPC_OK;
 }
 
-static enum golioth_rpc_status on_get_network_info(zcbor_state_t *request_params_array,
-						   zcbor_state_t *response_detail_map,
-						   void *callback_arg)
+static enum golioth_rpc_status on_get_network_info(zcbor_state_t* request_params_array, zcbor_state_t* response_detail_map, void* callback_arg)
 {
-	network_info_add_to_map(response_detail_map);
+    network_info_add_to_map(response_detail_map);
 
-	return GOLIOTH_RPC_OK;
+    return GOLIOTH_RPC_OK;
 }
 
-static void on_client_event(struct golioth_client *client,
-			    enum golioth_client_event event,
-			    void *arg)
+static void on_client_event(struct golioth_client* client, enum golioth_client_event event, void* arg)
 {
-	bool is_connected = (event == GOLIOTH_CLIENT_EVENT_CONNECTED);
-	if (is_connected)
-	{
-		k_sem_give(&golioth_connected);
-	}
-	LOG_INF("Golioth client %s", is_connected ? "connected" : "disconnected");
+    bool is_connected = (event == GOLIOTH_CLIENT_EVENT_CONNECTED);
+    if (is_connected) {
+        k_sem_give(&golioth_connected);
+    }
+
+    LOG_INF("Golioth client %s", is_connected ? "connected" : "disconnected");
 }
 
-static void temperature_push_handler(struct golioth_client *client,
-				     const struct golioth_response *response,
-				     const char *path,
-				     void *arg)
+static void temperature_push_handler(struct golioth_client* client, const struct golioth_response* response, const char* path, void* arg)
 {
-	if (response->status != GOLIOTH_OK)
-	{
-		LOG_WRN("Failed to push temperature: %d", response->status);
-		return;
-	}
+    if (response->status != GOLIOTH_OK) {
+        LOG_WRN("Failed to push temperature: %d", response->status);
+        return;
+    }
 
-	LOG_DBG("Temperature successfully pushed");
+    LOG_DBG("Temperature successfully pushed");
 
-	return;
+    return;
 }
 
 int main(void)
@@ -270,4 +262,6 @@ int main(void)
 
 		k_sleep(K_SECONDS(_loop_delay_s));
 	}
+
+
 }

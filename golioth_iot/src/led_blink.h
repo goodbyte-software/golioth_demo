@@ -12,4 +12,3 @@ void led_set_selected(uint8_t sel);
 void led_wake_thread(void);
 void led_set_delay(uint32_t delay);
 
-
