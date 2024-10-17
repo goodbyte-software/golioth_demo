@@ -12,7 +12,7 @@ The original project is licensed under the Apache License 2.0, and any `changes 
 
 Our goal was to facilitate a quick start with Golioth, using Visual Studio Code and Dev Containers.
 
-In fact, after cloning this repository and creating an account on Golioth, you should be able to run this Golioth project in 5 simple steps.
+In fact, after cloning this repository and creating an account on Golioth, you should be able to run this Golioth project in few simple steps.
 
 
 This README helps to install GoliothSDK properly with our demo.
@@ -30,6 +30,7 @@ We are using base image from Golioth with our features needed for flashing and w
 
 Step 1. Use Docker to initialize workspace
 ==========================================
+
 1.1 Clone repository to your local machine.
 
 1.2 Open project in VSCode then run it as devcontainer - there should be window pop up when u open project that contains .devcontainer directory(image below) or you can do it manually with VSCode terminal (>Dev Containers). 
@@ -43,6 +44,7 @@ Step 1. Use Docker to initialize workspace
 
 Step 2. Build & flash
 =====================
+
 2.1 When devcontainer is running and build is finished you should see nRF extension icon on your left panel - click it. 
 
 .. image:: .assets/VSCode_nrf.png
@@ -70,6 +72,7 @@ The alternative way is to use terminal
 
 Step 3. Connecting to Golioth
 =============================
+
 3.1 Create your project on Golioth Cloud, I suggest reading this guide:
 
 `Getting started guide from Golioth <https://docs.golioth.io/getting-started/>`_
@@ -101,6 +104,7 @@ Step 3. Connecting to Golioth
 
 Step 4. Working with Golioth console
 ====================================
+
 4.1 Check if you have any pipeline added, if not create one with 
 
 .. code-block::
