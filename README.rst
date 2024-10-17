@@ -1,6 +1,7 @@
 .. image:: .assets/logo_gb.png
    :alt: Logo GB
    :width: 600
+   :allign: center
 
 Golioth demo repository - Goodbyte Software
 #######################
