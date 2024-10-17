@@ -25,17 +25,13 @@ Demo is currently working with nRF7002-DK.
 Docker set up
 ************
 
-Our Docker image is a base that contains all system dependencies needed to work with Zephyr.
+Our Docker image is a base that contains all system dependencies needed to work with Zephyr, nRF and Golioth.
 
 
 Use Docker to initialize workspace
 ======================================
 
-.. code-block:: console
-
-    docker compose up
-    OR
-    use devcontainers in VSC
+Open project in VSCode then run it as devcontainer - there should be window pop up when u open project that contains .devcontainer directory or you can do it manually with VSCode terminal (>Dev Containers)
 
 Build & flash
 ==============
@@ -50,7 +46,7 @@ Build & flash
 Explanation
 ===========
 We are using west manifest files to download project specific dependencies.
-Files downloaded by manifest are also shared to local host in /repo directory.
+Files downloaded by manifest are also shared to local host in our repo directory.
 
 References
 ==========
