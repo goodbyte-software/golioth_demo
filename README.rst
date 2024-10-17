@@ -40,7 +40,7 @@ Step 1. Use Docker to initialize workspace
 
 .. image:: .assets/Devcontainer_open.png
    :alt: Opening Devcontainer
-   :width: 200
+   :width: 350
 
 
 Step 2. Build & flash
@@ -50,7 +50,7 @@ Step 2. Build & flash
 
 .. image:: .assets/VSCode_nrf.png
    :alt: nRF panel
-   :width: 200
+   :width: 350
 
 2.2 Add build configuration and choose nrf7002dk_nrf5340_cpuapp from the board target list.
 
@@ -60,7 +60,7 @@ Step 2. Build & flash
 
 .. image:: .assets/VSCode_actions_bar.png
    :alt: Actions bar
-   :width: 200
+   :width: 350
 
 
 The alternative way is to use terminal 
@@ -82,7 +82,7 @@ Step 3. Connecting to Golioth
 
 .. image:: .assets/VSCode_communication.png
    :alt: Devices bar
-   :width: 200
+   :width: 350
 
 3.2 Connect to Golioth by using terminal. 
 
