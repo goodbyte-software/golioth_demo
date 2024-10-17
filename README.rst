@@ -57,7 +57,7 @@ Step 2. Build & flash
 
 2.4 When build is finished actions bar appears, first of all lets flash our board.
 
-.. image:: .assets/VSCode_actions.png
+.. image:: .assets/VSCode_actions_bar.png
    :alt: Actions bar
    :width: 200
 
