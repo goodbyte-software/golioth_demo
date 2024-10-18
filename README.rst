@@ -3,25 +3,25 @@
    :width: 600
    :allign: center
 
-Golioth demo repository - Goodbyte Software
+Golioth project repository - Goodbyte Software
 #######################
 
 This is an adapted version of this `Golioth Zephyr training example <https://github.com/golioth/zephyr-training/tree/1d8840429516d862fb71c21c833e6e283d705927/01_IOT>`_
 
 It has been modified by Goodbyte Software for educational purposes. 
-The original project is licensed under the Apache License 2.0, and any `changes <https://github.com/goodbyte-software/golioth_demo/compare/init...master?expand=1>`_ have been made in accordance with this license.
+The original project is licensed under the Apache License 2.0, and any `changes <https://github.com/goodbyte-software/iot_with_golioth/compare/init...master?expand=1>`_ have been made in accordance with this license.
 
 Our goal was to facilitate a quick start with Golioth, using Visual Studio Code and Dev Containers.
 
 In fact, after cloning this repository and creating an account on Golioth, you should be able to run this Golioth project in few simple steps.
 
 
-This README helps to install GoliothSDK properly with our demo.
+This README helps to install GoliothSDK properly with our project.
 
 Boards
 ======
 
-Demo is currently working with nRF7002-DK.
+Project is currently working with nRF7002-DK.
 
 Docker
 ******
